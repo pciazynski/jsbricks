@@ -1,5 +1,7 @@
 let platforms;
 let player;
+let cursors;
+let ball;
 
 function preload() {
   this.load.image('sky', 'assets/sky.png');
@@ -23,9 +25,27 @@ function create() {
 
   player = this.physics.add.sprite(100, 550, 'brick1');
   player.body.setAllowGravity(false);
+
+  ball = this.physics.add.sprite(100, 450, 'bomb');
+  ball.setBounce(1);
+  ball.setCollideWorldBounds(true);
+  ball.setVelocity(Phaser.Math.Between(-200, 200), 20);
+  ball.allowGravity = false;
+
+  this.physics.add.collider(ball, platforms);
+  this.physics.add.collider(ball, player);
 }
 
 function update() {
+  cursors = this.input.keyboard.createCursorKeys();
+
+  if (cursors.left.isDown) {
+    player.setVelocityX(-200);
+  } else if (cursors.right.isDown) {
+    player.setVelocityX(200);
+  } else {
+    player.setVelocityX(0);
+  }
 }
 
 const config = {
