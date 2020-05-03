@@ -25,9 +25,10 @@ function create() {
 
   player = this.physics.add.sprite(100, 550, 'brick1');
   player.body.setAllowGravity(false);
+  player.body.setImmovable(true);
 
   ball = this.physics.add.sprite(100, 450, 'bomb');
-  ball.setBounce(1);
+  ball.setBounce(1.1);
   ball.setCollideWorldBounds(true);
   ball.setVelocity(Phaser.Math.Between(-200, 200), 20);
   ball.allowGravity = false;
